@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "node --test",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
   },
@@ -21,8 +21,10 @@
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@stylistic/eslint-plugin-js": "^2.10.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.12.0",
     "globals": "^15.11.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0"
   }
 }
