@@ -6,7 +6,6 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
-
 const initialBlogs = [
   {
     "title": "The Bear Cookbook",
@@ -36,17 +35,27 @@ const initialBlogs = [
 
 beforeEach(async () => {
   await Blog.deleteMany({})
-  for (const blog of initialBlogs) {
-    const blogObj = new Blog(blog)
-    await blogObj.save()
+  for (let blog of initialBlogs) {
+    let blogObj = new Blog(blog)
+    await blogObj.save() // executes sequentially, next iteration awaits for current to finish
   }
 })
 
-test('blogs are returned as json', async () => {
+test('correct amount of blogs are returned as json', async () => {
   const response = await api.get('/api/blogs')
   assert.strictEqual(response.body.length, initialBlogs.length)  
   assert.match(response.headers['content-type'], /application\/json/)
   assert.strictEqual(response.status, 200)
+})
+
+test.only('the unique identifier property of the blogs is named id', async () => {
+  const response = await api.get('/api/blogs')
+  const blogs = response.body
+  blogs.forEach(blog => {
+    const props = Object.keys(blog)
+    assert.notStrictEqual(props.find(p => p === 'id'), undefined)
+    assert.strictEqual(props.find(p => p === '_id'), undefined)
+  })
 })
 
 after(async () => {
