@@ -8,8 +8,8 @@ blogsRouter.get('/', async (_request, response) => {
 
 blogsRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body)
-  const newBlog = await blog.save()
-  response.status(201).json(newBlog)  
+  const savedBlog = await blog.save() // errors get caught and sent to the error-handler middleware thanks to express-async-errors
+  response.status(201).json(savedBlog)
 })
 
 module.exports = blogsRouter
