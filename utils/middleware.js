@@ -14,6 +14,9 @@ const unknownEndpoint = (_request, response) => {
 const errorHandler = (error, _request, response, next) => {
   logger.error(error.message)
 
+  if (error.name === 'CastError') { // ID in request does not conform to Mongoose standards (e.g. shorter than minimum)
+    return response.status(400).send({ error: 'Malformatted ID' })
+  }
   if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
   }
