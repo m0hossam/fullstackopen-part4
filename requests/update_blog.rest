@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/6747239819db273e0b032508
+content-type: application/json
+
+{
+    "title": "The Pragmatic Engineer",
+    "author": "Niccolo Pinocchio",
+    "url": "http://pinonico.com/thepragmaticengineer",
+    "likes": 17
+}

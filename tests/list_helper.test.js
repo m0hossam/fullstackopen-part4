@@ -53,114 +53,118 @@ const blogs = [
   }
 ]
 
-describe('totalLikes tests:', () => {
-  test('list is empty', () => {
-    const emptyList = []
-    const result = listHelper.totalLikes(emptyList)
-    assert.strictEqual(result, 0)
-  })
+describe('list helper tests', () => {
 
-  test('list has one blog', () => {
-    const oneBlogList = blogs.slice(0, 1)
-    const result = listHelper.totalLikes(oneBlogList)
-    assert.strictEqual(result, oneBlogList[0].likes)
-  })
-
-  test('list has one blog whose likes equal 0', () => {
-    const oneBlogZeroLikesList = blogs.slice(4, 5)
-    const result = listHelper.totalLikes(oneBlogZeroLikesList)
-    assert.strictEqual(result, 0)
-  })
-
-  test('list has more than one blog', () => {
-    const result = listHelper.totalLikes(blogs)
-    var expected  = 0
-    blogs.forEach((blog) => { // not using array.reduce() because the tested function is using it
-      expected += blog.likes
+  describe('totalLikes tests:', () => {
+    test('list is empty', () => {
+      const emptyList = []
+      const result = listHelper.totalLikes(emptyList)
+      assert.strictEqual(result, 0)
     })
-    assert.strictEqual(result, expected)
-  })
-})
 
-describe('favoriteBlog tests:', () => { // compare likes instead of actual objects
-  test('list is empty', () => {
-    const emptyList = []
-    const result = listHelper.favoriteBlog(emptyList)
-    assert.deepStrictEqual(result, null)
-  })
-
-  test('list has one blog', () => {
-    const oneBlogList = blogs.slice(0, 1)
-    const result = listHelper.favoriteBlog(oneBlogList)
-    assert.strictEqual(result.likes, oneBlogList[0].likes)
-  })
-
-  test('list has one blog whose likes equal 0', () => {
-    const oneBlogZeroLikesList = blogs.slice(4, 5)
-    const result = listHelper.favoriteBlog(oneBlogZeroLikesList)
-    assert.strictEqual(result.likes, oneBlogZeroLikesList[0].likes)
-  })
-
-  test('list has more than one blog', () => {
-    const result = listHelper.favoriteBlog(blogs)
-    var mostLikes = 0
-    blogs.forEach((blog) => { // not using array.reduce() because the tested function is using it
-      mostLikes = blog.likes > mostLikes ? blog.likes : mostLikes
+    test('list has one blog', () => {
+      const oneBlogList = blogs.slice(0, 1)
+      const result = listHelper.totalLikes(oneBlogList)
+      assert.strictEqual(result, oneBlogList[0].likes)
     })
-    assert.strictEqual(result.likes, mostLikes) // do not compare blogs, there might be multiple with the same no. of likes
-  })
-})
 
-describe('mostBlogs tests:', () => { // compare likes instead of actual objects
-  test('list is empty', () => {
-    const emptyList = []
-    const result = listHelper.mostBlogs(emptyList)
-    assert.deepStrictEqual(result, null)
-  })
+    test('list has one blog whose likes equal 0', () => {
+      const oneBlogZeroLikesList = blogs.slice(4, 5)
+      const result = listHelper.totalLikes(oneBlogZeroLikesList)
+      assert.strictEqual(result, 0)
+    })
 
-  test('list has one blog', () => {
-    const oneBlogList = blogs.slice(0, 1)
-    const result = listHelper.mostBlogs(oneBlogList)
-    const expected = {
-      author: oneBlogList[0].author,
-      blogs: 1
-    }
-    assert.deepStrictEqual(result, expected)
+    test('list has more than one blog', () => {
+      const result = listHelper.totalLikes(blogs)
+      var expected  = 0
+      blogs.forEach((blog) => { // not using array.reduce() because the tested function is using it
+        expected += blog.likes
+      })
+      assert.strictEqual(result, expected)
+    })
   })
 
-  test('list has more than one blog', () => {
-    const result = listHelper.mostBlogs(blogs)
-    const expected = {
-      author: 'Robert C. Martin',
-      blogs: 3
-    }
-    assert.deepStrictEqual(result, expected)
-  })
-})
+  describe('favoriteBlog tests:', () => { // compare likes instead of actual objects
+    test('list is empty', () => {
+      const emptyList = []
+      const result = listHelper.favoriteBlog(emptyList)
+      assert.deepStrictEqual(result, null)
+    })
 
-describe('mostLikes tests:', () => { // compare likes instead of actual objects
-  test('list is empty', () => {
-    const emptyList = []
-    const result = listHelper.mostLikes(emptyList)
-    assert.deepStrictEqual(result, null)
+    test('list has one blog', () => {
+      const oneBlogList = blogs.slice(0, 1)
+      const result = listHelper.favoriteBlog(oneBlogList)
+      assert.strictEqual(result.likes, oneBlogList[0].likes)
+    })
+
+    test('list has one blog whose likes equal 0', () => {
+      const oneBlogZeroLikesList = blogs.slice(4, 5)
+      const result = listHelper.favoriteBlog(oneBlogZeroLikesList)
+      assert.strictEqual(result.likes, oneBlogZeroLikesList[0].likes)
+    })
+
+    test('list has more than one blog', () => {
+      const result = listHelper.favoriteBlog(blogs)
+      var mostLikes = 0
+      blogs.forEach((blog) => { // not using array.reduce() because the tested function is using it
+        mostLikes = blog.likes > mostLikes ? blog.likes : mostLikes
+      })
+      assert.strictEqual(result.likes, mostLikes) // do not compare blogs, there might be multiple with the same no. of likes
+    })
   })
 
-  test('list has one blog', () => {
-    const oneBlogList = blogs.slice(0, 1)
-    const result = listHelper.mostLikes(oneBlogList)
-    const expected = {
-      author: oneBlogList[0].author,
-      likes: oneBlogList[0].likes
-    }
-    assert.deepStrictEqual(result, expected)
+  describe('mostBlogs tests:', () => { // compare likes instead of actual objects
+    test('list is empty', () => {
+      const emptyList = []
+      const result = listHelper.mostBlogs(emptyList)
+      assert.deepStrictEqual(result, null)
+    })
+
+    test('list has one blog', () => {
+      const oneBlogList = blogs.slice(0, 1)
+      const result = listHelper.mostBlogs(oneBlogList)
+      const expected = {
+        author: oneBlogList[0].author,
+        blogs: 1
+      }
+      assert.deepStrictEqual(result, expected)
+    })
+
+    test('list has more than one blog', () => {
+      const result = listHelper.mostBlogs(blogs)
+      const expected = {
+        author: 'Robert C. Martin',
+        blogs: 3
+      }
+      assert.deepStrictEqual(result, expected)
+    })
   })
 
-  test('list has more than one blog', () => {
-    const result = listHelper.mostLikes(blogs)
-    const expected = {
-      author: 'Edsger W. Dijkstra',
-      likes: 17
-    }
-    assert.deepStrictEqual(result, expected)
+  describe('mostLikes tests:', () => { // compare likes instead of actual objects
+    test('list is empty', () => {
+      const emptyList = []
+      const result = listHelper.mostLikes(emptyList)
+      assert.deepStrictEqual(result, null)
+    })
+
+    test('list has one blog', () => {
+      const oneBlogList = blogs.slice(0, 1)
+      const result = listHelper.mostLikes(oneBlogList)
+      const expected = {
+        author: oneBlogList[0].author,
+        likes: oneBlogList[0].likes
+      }
+      assert.deepStrictEqual(result, expected)
+    })
+
+    test('list has more than one blog', () => {
+      const result = listHelper.mostLikes(blogs)
+      const expected = {
+        author: 'Edsger W. Dijkstra',
+        likes: 17
+      }
+      assert.deepStrictEqual(result, expected)
+    })
   })
+
 })
