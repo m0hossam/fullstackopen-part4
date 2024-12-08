@@ -3,7 +3,7 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
 usersRouter.get('/', async (_request, response) => {
-  const Users = await User.find({})
+  const Users = await User.find({}).populate('blogs', { user : 0 }) // `user : 0` hides the user prop of the blog to avoid nesting
   response.json(Users)
 })
 

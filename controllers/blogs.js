@@ -1,14 +1,22 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
 
 blogsRouter.get('/', async (_request, response) => {
-  const blogs = await Blog.find({})
+  const blogs = await Blog.find({}).populate('user', { blogs : 0 }) // `blogs : 0` hides the blogs prop of the user to avoid nesting
   response.json(blogs)
 })
 
 blogsRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body)
-  const savedBlog = await blog.save() // errors get caught and sent to the error-handler middleware thanks to express-async-errors
+  const user = await User.findOne()
+  blog.user = user
+  
+  const savedBlog = await blog.save() // errors get caught and sent to the error-handler middleware thanks to express-async-errors 
+  user.blogs = user.blogs.concat(savedBlog._id)
+  await user.save()
+  
   response.status(201).json(savedBlog)
 })
 
