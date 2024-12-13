@@ -3,14 +3,6 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-const getTokenFromRequest = (request) => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) { // 'Bearer smthsmthtoken'
-    return authorization.replace('Bearer ', '') // trim the scheme and return only the token
-  }
-  return null
-}
-
 blogsRouter.get('/', async (_request, response) => {
   const blogs = await Blog.find({}).populate('user', { blogs : 0 }) // `blogs : 0` hides the blogs prop of the user to avoid nesting
   response.json(blogs)
@@ -19,18 +11,21 @@ blogsRouter.get('/', async (_request, response) => {
 blogsRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body)
 
-  const decodedToken = jwt.verify(getTokenFromRequest(request), process.env.SECRET) // raises JsonWebTokenError or TokenExpiredError if invalid 
+  const decodedToken = jwt.verify(request.token, process.env.SECRET) // request.token is set in tokenExtractor middleware, raises JsonWebTokenError or TokenExpiredError if invalid
   if (!decodedToken.id) { // decodedToken should contain username and id fields
     return response.status(401).json({ error: 'token invalid' })
   }
 
   const user = await User.findById(decodedToken.id)
+  if (!user) {
+    return response.status(404).json({ error: 'user not found' })
+  }
   blog.user = user
-  
-  const savedBlog = await blog.save() // errors get caught and sent to the error-handler middleware thanks to express-async-errors 
+
+  const savedBlog = await blog.save() // errors get caught and sent to the error-handler middleware thanks to express-async-errors
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
-  
+
   response.status(201).json(savedBlog)
 })
 

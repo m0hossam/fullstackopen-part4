@@ -85,7 +85,7 @@ describe('user api test when there is one user in db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: "ab",
+      username: 'ab',
       name: 'Freddy Kruger',
       password: 'p@$$w0rd',
     }
@@ -105,7 +105,7 @@ describe('user api test when there is one user in db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: "nightmare_13",
+      username: 'nightmare_13',
       name: 'Freddy Kruger',
     }
 
@@ -124,7 +124,7 @@ describe('user api test when there is one user in db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: "nightmare_13",
+      username: 'nightmare_13',
       name: 'Freddy Kruger',
       password: 'ab'
     }
