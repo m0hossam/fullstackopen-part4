@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY3NTczZGY5ZWQ4YTM3OWFkZThhNmVlNSIsImlhdCI6MTczNDIxMTM5MywiZXhwIjoxNzM0MjE0OTkzfQ.y1z17AVXml-MySRF0Bv0EgK0KjT5dsVmFRVGTHMLyM8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY3NTczZGY5ZWQ4YTM3OWFkZThhNmVlNSIsImlhdCI6MTczNDIxMjgzNiwiZXhwIjoxNzM0MjE2NDM2fQ.CL7G8SfU2olM92TmZIw9kQ9HNaNSjHyocExzdVeDRII
 
 {
     "title": "Tesla Cortex",
