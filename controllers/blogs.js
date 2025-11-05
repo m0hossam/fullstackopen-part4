@@ -3,7 +3,7 @@ const Blog = require('../models/blog')
 const middleware = require('../utils/middleware')
 
 blogsRouter.get('/', async (_request, response) => {
-  const blogs = await Blog.find({}).populate('user', { blogs : 0 }) // `blogs : 0` hides the blogs prop of the user to avoid nesting
+  const blogs = await Blog.find({}).populate('user', { blogs: 0 }) // `blogs : 0` hides the blogs prop of the user to avoid nesting
   response.json(blogs)
 })
 
@@ -57,7 +57,7 @@ blogsRouter.put('/:id', async (request, response) => {
       runValidators: true, // run update validators
       context: 'query' // use query context, not the global object
     }
-  )
+  ).populate('user', { blogs: 0 })
   if (updatedBlog) {
     response.json(updatedBlog)
   } else {
