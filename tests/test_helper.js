@@ -2,34 +2,34 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 
 const rootUser = {
-  username: 'root',
-  name: 'Mohamed Hossam',
-  password: 'dummypsswrd'
+  username: 'admin',
+  password: 'admin',
+  name: 'Mohamed Hossam'
 }
 
 const initialBlogs = [
   {
-    'title': 'The Bear Cookbook',
-    'author': 'Carmen Berzatto',
-    'url': 'http://carmythebear.com/cookbook',
+    'title': 'Build Your Own DBMS in Go',
+    'author': 'Steven Merchant',
+    'url': 'https://build_your_own_x.com/dbms_go',
     'likes': 42
   },
   {
     'title': 'The Pragmatic Engineer',
     'author': 'Niccolo Pinocchio',
-    'url': 'http://pinonico.com/thepragmaticengineer',
+    'url': 'https://pinocchio.com/the_pragmatic_engineer',
     'likes': 1337
   },
   {
     'title': 'DBs Explained',
     'author': 'Andy Pavlo',
-    'url': 'http://cmu.com/dbgroup',
+    'url': 'https://cmu.com/db_group/intro_to_dbs',
     'likes': 17
   },
   {
-    'title': 'The Undertaker',
+    'title': 'Tales of The Undertaker',
     'author': 'Mark Callaway',
-    'url': 'http://wwe.com/theundertaker',
+    'url': 'https://wwe.com/the_undertaker_tales',
     'likes': 31,
   }
 ]

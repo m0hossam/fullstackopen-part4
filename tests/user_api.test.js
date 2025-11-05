@@ -11,9 +11,9 @@ const api = supertest(app) // superagent object
 describe('user api test when there is one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
-    const passwordHash = await bcrypt.hash('dummypsswrd', 10)
+    const passwordHash = await bcrypt.hash('admin', 10)
     const user = new User({
-      username: 'root',
+      username: 'admin',
       name: 'Mohamed Hossam',
       passwordHash: passwordHash
     })
@@ -46,7 +46,7 @@ describe('user api test when there is one user in db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'root',
+      username: 'admin',
       name: 'Freddy Kruger',
       password: 'p@$$w0rd',
     }
